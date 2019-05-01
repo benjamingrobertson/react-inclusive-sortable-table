@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './styles.css';
+import styles from './styles.css';
 
 const Arrow = props => {
   let ascending = props.sortDir === 'ascending';
@@ -67,7 +67,7 @@ class Table extends React.Component {
     return (
       <div>
         <div
-          className="table-container"
+          className={styles.tableContainer}
           ref={this.container}
           tabIndex={this.state.tabindex}
           aria-labelledby={this.captionID}
@@ -129,7 +129,7 @@ class Table extends React.Component {
             </tbody>
           </table>
         </div>
-        <div className="lists-container">
+        <div className={styles.listsContainer}>
           <h2>{this.props.caption}</h2>
           {this.props.rows.map((row, i) => (
             <div key={i}>

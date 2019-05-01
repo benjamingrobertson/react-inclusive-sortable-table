@@ -24,12 +24,12 @@ body {
   overflow-x: hidden;
 }
 
-.table-container {
+.tableContainer {
   overflow-x: auto;
 }
 
 @media (max-width: 400px) {
-  .table-container {
+  .tableContainer {
     display: none;
   }
 }
@@ -70,12 +70,12 @@ caption {
   text-align: left;
 }
 
-.lists-container {
+.listsContainer {
   display: block;
 }
 
 @media (min-width: 400px) {
-  .lists-container {
+  .listsContainer {
     display: none;
   }
 }
