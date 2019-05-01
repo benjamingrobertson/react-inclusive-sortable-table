@@ -15,12 +15,12 @@ npm install --save react-inclusive-sortable-table
 ```jsx
 import React, { Component } from 'react'
 
-import MyComponent from 'react-inclusive-sortable-table'
+import Table from 'react-inclusive-sortable-table'
 
 class Example extends Component {
   render () {
     return (
-      <MyComponent />
+      <Table />
     )
   }
 }
