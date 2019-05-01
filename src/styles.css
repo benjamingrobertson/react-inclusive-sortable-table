@@ -1,8 +1,139 @@
-/* add css styles here (optional) */
+:root {
+  font-size: calc(1rem + 0.5vw);
+  font-family: sans-serif;
+  margin: 1rem;
+}
 
-.test {
-  display: inline-block;
-  margin: 2em auto;
+:focus {
+  -webkit-box-shadow: 0 0 0 4px DodgerBlue;
+          box-shadow: 0 0 0 4px DodgerBlue;
+  outline: none;
+}
+
+div:not([tabindex]):focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+@media (max-width: 400px) {
+  .table-container {
+    display: none;
+  }
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
   border: 2px solid #000;
-  font-size: 2em;
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+th {
+  background: #000;
+  color: #fff;
+}
+
+tr:first-of-type th:not(:last-child) {
+  border-right-color: #fff;
+}
+
+tr:first-child th:first-child,
+tr:not(:first-child):not(:last-child) th {
+  border-bottom-color: #fff !important;
+}
+
+caption {
+  margin-bottom: 0.5rem;
+  font-style: italic;
+  text-align: left;
+}
+
+.lists-container {
+  display: block;
+}
+
+@media (min-width: 400px) {
+  .lists-container {
+    display: none;
+  }
+}
+
+dl {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+dl > * {
+  -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+  margin: 0;
+}
+
+dt {
+  padding-right: 0.5rem;
+}
+
+dt {
+  font-weight: bold;
+}
+
+th button {
+  background: #fff;
+  color: #000;
+  border: 0;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: bold;
+  vertical-align: middle;
+  margin-left: 0.333rem;
+}
+
+h3 {
+  background: #000;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+th svg {
+  stroke: currentColor;
+  stroke-width: 20;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  width: 0.5rem;
+  height: 1.5em;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden !important;
 }
