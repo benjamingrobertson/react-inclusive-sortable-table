@@ -65,6 +65,12 @@ class Example extends Component {
 }
 ```
 
+## Todos
+
+- Set what columns are sortable
+- Customizable sorting button
+- Customizable sorting methods
+
 ## License
 
 MIT © [benjamingrobertson](https://github.com/benjamingrobertson)
