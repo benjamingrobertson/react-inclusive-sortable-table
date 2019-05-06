@@ -1,67 +1,67 @@
-import React from 'react';
+import React from 'react'
 
-import styles from './styles.css';
+import styles from './styles.css'
 
-const Arrow = props => {
-  let ascending = props.sortDir === 'ascending';
+const Arrow = (props) => {
+  let ascending = props.sortDir === 'ascending'
   return (
-    <svg viewBox="0 0 100 200" width="100" height="200">
+    <svg viewBox='0 0 100 200' width='100' height='200'>
       {!(!ascending && props.isCurrent) && (
-        <polyline points="20 50, 50 20, 80 50" />
+        <polyline points='20 50, 50 20, 80 50' />
       )}
-      <line x1="50" y1="20" x2="50" y2="180" />
+      <line x1='50' y1='20' x2='50' y2='180' />
       {!(ascending && props.isCurrent) && (
-        <polyline points="20 150, 50 180, 80 150" />
+        <polyline points='20 150, 50 180, 80 150' />
       )}
     </svg>
-  );
-};
+  )
+}
 
 class Table extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       tabindex: null,
       rows: props.rows,
       sortedBy: null,
       sortDir: 'none'
-    };
-    this.container = React.createRef();
-    this.sortBy = this.sortBy.bind(this);
+    }
+    this.container = React.createRef()
+    this.sortBy = this.sortBy.bind(this)
     this.captionID =
       'caption-' +
       Math.random()
         .toString(36)
-        .substr(2, 9);
+        .substr(2, 9)
   }
 
   sortBy(i) {
-    let sortDir;
-    let ascending = this.state.sortDir === 'ascending';
+    let sortDir
+    let ascending = this.state.sortDir === 'ascending'
     if (i === this.state.sortedBy) {
-      sortDir = !ascending ? 'ascending' : 'descending';
+      sortDir = !ascending ? 'ascending' : 'descending'
     } else {
-      sortDir = 'ascending';
+      sortDir = 'ascending'
     }
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       rows: prevState.rows.slice(0).sort((a, b) => {
         if (sortDir === 'ascending') {
-          return a[i] > b[i] ? 1 : a[i] < b[i] ? -1 : 0;
+          return a[i] > b[i] ? 1 : a[i] < b[i] ? -1 : 0
         } else {
-          return a[i] < b[i] ? 1 : a[i] > b[i] ? -1 : 0;
+          return a[i] < b[i] ? 1 : a[i] > b[i] ? -1 : 0
         }
       }),
       sortedBy: i,
       sortDir: sortDir
-    }));
+    }))
   }
 
   componentDidMount() {
-    const { scrollWidth, clientWidth } = this.container;
-    let scrollable = scrollWidth > clientWidth;
+    const { scrollWidth, clientWidth } = this.container
+    let scrollable = scrollWidth > clientWidth
     this.setState({
       tabindex: scrollable ? '0' : null
-    });
+    })
   }
   render() {
     return (
@@ -71,7 +71,7 @@ class Table extends React.Component {
           ref={this.container}
           tabIndex={this.state.tabindex}
           aria-labelledby={this.captionID}
-          role="group"
+          role='group'
         >
           <table>
             <caption id={this.captionID}>
@@ -86,8 +86,8 @@ class Table extends React.Component {
               <tr>
                 {this.props.headers.map((header, i) => (
                   <th
-                    role="columnheader"
-                    scope="col"
+                    role='columnheader'
+                    scope='col'
                     key={i}
                     aria-sort={
                       this.state.sortedBy === i ? this.state.sortDir : 'none'
@@ -100,7 +100,7 @@ class Table extends React.Component {
                           sortDir={this.state.sortDir}
                           isCurrent={this.state.sortedBy === i}
                         />
-                        <span className="visually-hidden">
+                        <span className='visually-hidden'>
                           sort by {header} in
                           {this.state.sortDir !== 'ascending'
                             ? 'ascending'
@@ -114,15 +114,14 @@ class Table extends React.Component {
               </tr>
               {this.state.rows.map((row, i) => (
                 <tr key={i}>
-                  {row.map(
-                    (cell, i) =>
-                      this.props.rowHeaders && i < 1 ? (
-                        <th scope="row" key={i}>
-                          {cell}
-                        </th>
-                      ) : (
-                        <td key={i}>{cell}</td>
-                      )
+                  {row.map((cell, i) =>
+                    this.props.rowHeaders && i < 1 ? (
+                      <th scope='row' key={i}>
+                        {cell}
+                      </th>
+                    ) : (
+                      <td key={i}>{cell}</td>
+                    )
                   )}
                 </tr>
               ))}
@@ -149,8 +148,8 @@ class Table extends React.Component {
           ))}
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Table;
+export default Table
