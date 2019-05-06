@@ -1,6 +1,6 @@
 {
   "name": "react-inclusive-sortable-table",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An accessible, sortable table based off of Heydon Pickering&#x27;s Sortable Table from Inclusive Components.",
   "author": "benjamingrobertson",
   "license": "MIT",
