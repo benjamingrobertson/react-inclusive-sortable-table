@@ -25,6 +25,7 @@ export default class Table extends Component {
 
   static propTypes = {
     caption: PropTypes.string,
+    className: PropTypes.string,
     headers: PropTypes.array.isRequired,
     rowHeaders: PropTypes.bool,
     rows: PropTypes.array.isRequired,
@@ -62,10 +63,17 @@ export default class Table extends Component {
     })
   }
   render() {
-    const { rows, caption, headers, sortable, rowHeaders } = this.props
+    const {
+      rows,
+      caption,
+      headers,
+      sortable,
+      rowHeaders,
+      className
+    } = this.props
 
     return (
-      <div>
+      <div className={className}>
         <div
           className={styles.tableContainer}
           ref={this.container}
