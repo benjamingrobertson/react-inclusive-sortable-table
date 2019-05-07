@@ -16,6 +16,7 @@ export default class Table extends Component {
     }
     this.container = React.createRef()
     this.sortBy = this.sortBy.bind(this)
+    this.sort = this.sort.bind(this)
     this.captionID =
       'caption-' +
       Math.random()
@@ -27,27 +28,40 @@ export default class Table extends Component {
     caption: PropTypes.string,
     className: PropTypes.string,
     customArrow: PropTypes.func,
+    customSort: PropTypes.object,
     headers: PropTypes.array.isRequired,
     rowHeaders: PropTypes.bool,
     rows: PropTypes.array.isRequired,
     sortable: PropTypes.oneOfType([PropTypes.array, PropTypes.bool])
   };
 
-  sortBy(i) {
-    let sortDir
-    let ascending = this.state.sortDir === 'ascending'
-    if (i === this.state.sortedBy) {
-      sortDir = !ascending ? 'ascending' : 'descending'
+  sort(a, b, sortDir, i) {
+    if (sortDir === 'ascending') {
+      return a[i] > b[i] ? 1 : a[i] < b[i] ? -1 : 0
     } else {
-      sortDir = 'ascending'
+      return a[i] < b[i] ? 1 : a[i] > b[i] ? -1 : 0
+    }
+  }
+
+  sortBy(i) {
+    const { customSort } = this.props
+    const { sortDir, sortedBy } = this.state
+
+    let sortDirection
+    let ascending = sortDir === 'ascending'
+    if (i === sortedBy) {
+      sortDirection = !ascending ? 'ascending' : 'descending'
+    } else {
+      sortDirection = 'ascending'
     }
     this.setState((prevState) => ({
       rows: prevState.rows.slice(0).sort((a, b) => {
-        if (sortDir === 'ascending') {
-          return a[i] > b[i] ? 1 : a[i] < b[i] ? -1 : 0
-        } else {
-          return a[i] < b[i] ? 1 : a[i] > b[i] ? -1 : 0
-        }
+        return (
+          // If a custom sort method is provided for this column, use it.
+          (customSort[i] && customSort[i](a, b, sortDirection, i)) ||
+          // Otherwise use the default sort.
+          this.sort(a, b, sortDirection, i)
+        )
       }),
       sortedBy: i,
       sortDir: sortDir

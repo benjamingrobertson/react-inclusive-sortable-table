@@ -118,6 +118,23 @@ return (
 )
 ```
 
+### customSort
+
+This should take an object, with the keys of the object reflecting the index of the array you want to sort, and the value reflecting the method you want to pass to `Array.sort()`.
+
+Usage:
+
+```jsx
+<Table
+  customSort={{
+    // This will pass a custom sort method to the 2nd column.
+    1: (a, b, sortDirection, index) => {
+      // do your sorting here
+    }
+  }}
+/>
+```
+
 ### headers
 
 An array of table headers. Will be wrapped in `<th>` for the table display and `<dt>` for the definition list display.
@@ -192,7 +209,6 @@ For example, to sort the 2nd and 4th columns:
 
 ## Todos
 
-- Customizable sorting methods
 
 ## License
 
