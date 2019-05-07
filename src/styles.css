@@ -41,18 +41,6 @@ caption {
   text-align: left;
 }
 
-.listsContainer {
-  display: block;
-}
-
-@media (min-width: 400px) {
-  .listsContainer {
-    display: none;
-  }
-}
-
-
-
 th button {
   background: #fff;
   color: #000;

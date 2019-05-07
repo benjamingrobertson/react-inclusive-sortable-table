@@ -19,3 +19,13 @@ dt {
 dt {
   font-weight: bold;
 }
+
+.listsContainer {
+  display: block;
+}
+
+@media (min-width: 400px) {
+  .listsContainer {
+    display: none;
+  }
+}
