@@ -26,6 +26,7 @@ export default class Table extends Component {
   static propTypes = {
     caption: PropTypes.string,
     className: PropTypes.string,
+    customArrow: PropTypes.func,
     headers: PropTypes.array.isRequired,
     rowHeaders: PropTypes.bool,
     rows: PropTypes.array.isRequired,
@@ -64,12 +65,13 @@ export default class Table extends Component {
   }
   render() {
     const {
-      rows,
       caption,
+      className,
+      customArrow,
       headers,
-      sortable,
       rowHeaders,
-      className
+      rows,
+      sortable
     } = this.props
 
     return (
@@ -101,6 +103,7 @@ export default class Table extends Component {
                     sortBy={this.sortBy}
                     sortDir={this.state.sortDir}
                     sortedBy={this.state.sortedBy}
+                    customArrow={customArrow}
                   />
                 ))}
               </tr>

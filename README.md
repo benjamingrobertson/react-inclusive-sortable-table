@@ -1,8 +1,12 @@
 # react-inclusive-sortable-table
 
-> An accessible, sortable table based off of Heydon Pickering&#x27;s Sortable Table from Inclusive Components.
+> An accessible, responsive, sortable table based off of Heydon Pickering&#x27;s Sortable Table from Inclusive Components.
 
 [![NPM](https://img.shields.io/npm/v/react-inclusive-sortable-table.svg)](https://www.npmjs.com/package/react-inclusive-sortable-table) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+Read the artice! [Data Tables](https://inclusive-components.design/data-tables/)
+
+This component displays a `<table>` on large viewports and a definition list `<dl>` on small viewports.
 
 ## Install
 
@@ -74,6 +78,45 @@ The title of your table. Will be wrapped in a `<caption>` for the table display 
 ### className
 
 An optional class name to use for custom styling. Will be added to the component wrapper.
+
+### customArrow
+
+A render props method for using a custom arrow icon.
+
+Here is an example of how you override the arrow with a custom component:
+
+```jsx
+<Table
+  customArrow={(sortDir, isCurrent) => (
+    <p>
+      {sortDir}, {isCurrent}
+    </p>
+  )}
+  caption="Front end websites"
+  headers={headers}
+  rows={rows}
+  sortable
+/>
+
+```
+
+The default arrow looks like this (it uses sortDirection and isCurrent to determine which way the arrow should point):
+
+```jsx
+let ascending = sortDir === 'ascending'
+
+return (
+  <svg viewBox='0 0 100 200' width='100' height='200'>
+    {!(!ascending && isCurrent) && (
+      <polyline points='20 50, 50 20, 80 50' />
+    )}
+    <line x1='50' y1='20' x2='50' y2='180' />
+    {!(ascending && isCurrent) && (
+      <polyline points='20 150, 50 180, 80 150' />
+    )}
+  </svg>
+)
+```
 
 ### headers
 
@@ -149,7 +192,6 @@ For example, to sort the 2nd and 4th columns:
 
 ## Todos
 
-- Customizable sorting button
 - Customizable sorting methods
 
 ## License

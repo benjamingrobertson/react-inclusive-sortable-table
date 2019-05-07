@@ -4,7 +4,15 @@ import Arrow from '../arrow/arrow'
 
 import styles from './styles.css'
 
-const th = ({ sortedBy, i, header, sortBy, sortDir, sortable }) => {
+const th = ({
+  sortedBy,
+  i,
+  header,
+  sortBy,
+  sortDir,
+  sortable,
+  customArrow
+}) => {
   const sortableColumn =
     (Array.isArray(sortable) && sortable.includes(i)) || sortable === true
 
@@ -17,7 +25,11 @@ const th = ({ sortedBy, i, header, sortBy, sortDir, sortable }) => {
       {header}
       {sortableColumn && (
         <button onClick={() => sortBy(i)}>
-          <Arrow sortDir={sortDir} isCurrent={sortedBy === i} />
+          <Arrow
+            sortDir={sortDir}
+            isCurrent={sortedBy === i}
+            customArrow={customArrow}
+          />
           <span className={styles.visuallyHidden}>
             sort by {header} in
             {sortDir !== 'ascending' ? 'ascending' : 'descending'}
@@ -30,6 +42,7 @@ const th = ({ sortedBy, i, header, sortBy, sortDir, sortable }) => {
 }
 
 th.propTypes = {
+  customArrow: PropTypes.func,
   header: PropTypes.string.isRequired,
   i: PropTypes.number.isRequired,
   sortable: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
