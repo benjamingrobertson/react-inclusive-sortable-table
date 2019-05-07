@@ -1,0 +1,21 @@
+dl {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+dl > * {
+  -ms-flex: 0 0 50%;
+      flex: 0 0 50%;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+dt {
+  padding-right: 0.5rem;
+}
+
+dt {
+  font-weight: bold;
+}

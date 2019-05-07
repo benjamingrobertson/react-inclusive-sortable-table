@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 const Arrow = ({ sortDir, isCurrent }) => {
   let ascending = sortDir === 'ascending'
@@ -11,6 +12,11 @@ const Arrow = ({ sortDir, isCurrent }) => {
       )}
     </svg>
   )
+}
+
+Arrow.propTypes = {
+  sortDir: PropTypes.string,
+  isCurrent: PropTypes.bool
 }
 
 export default Arrow

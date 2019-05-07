@@ -51,27 +51,7 @@ caption {
   }
 }
 
-dl {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-}
 
-dl > * {
-  -ms-flex: 0 0 50%;
-      flex: 0 0 50%;
-  margin: 0;
-  margin-bottom: 0.5rem;
-}
-
-dt {
-  padding-right: 0.5rem;
-}
-
-dt {
-  font-weight: bold;
-}
 
 th button {
   background: #fff;
@@ -95,12 +75,4 @@ th svg {
   height: 1.5em;
 }
 
-.visuallyHidden {
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  padding: 0 !important;
-  border: 0 !important;
-  height: 1px !important;
-  width: 1px !important;
-  overflow: hidden !important;
-}
+

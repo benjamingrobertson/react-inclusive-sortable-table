@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Arrow from './arrow'
 
 import styles from './styles.css'
-import DefinitionList from './definition-list'
+import DefinitionList from './definition-list/definition-list'
+import Th from './th/th'
 
 export default class Table extends Component {
   constructor(props) {
@@ -29,7 +29,7 @@ export default class Table extends Component {
     headers: PropTypes.array.isRequired,
     rowHeaders: PropTypes.bool,
     rows: PropTypes.array.isRequired,
-    sortable: PropTypes.bool
+    sortable: PropTypes.oneOfType([PropTypes.array, PropTypes.bool])
   };
 
   sortBy(i) {
@@ -93,31 +93,15 @@ export default class Table extends Component {
             <tbody>
               <tr>
                 {headers.map((header, i) => (
-                  <th
-                    role='columnheader'
-                    scope='col'
+                  <Th
+                    header={header}
+                    i={i}
                     key={i}
-                    aria-sort={
-                      this.state.sortedBy === i ? this.state.sortDir : 'none'
-                    }
-                  >
-                    {header}
-                    {sortable && (
-                      <button onClick={() => this.sortBy(i)}>
-                        <Arrow
-                          sortDir={this.state.sortDir}
-                          isCurrent={this.state.sortedBy === i}
-                        />
-                        <span className={styles.visuallyHidden}>
-                          sort by {header} in
-                          {this.state.sortDir !== 'ascending'
-                            ? 'ascending'
-                            : 'descending'}
-                          order
-                        </span>
-                      </button>
-                    )}
-                  </th>
+                    sortable={sortable}
+                    sortBy={this.sortBy}
+                    sortDir={this.state.sortDir}
+                    sortedBy={this.state.sortedBy}
+                  />
                 ))}
               </tr>
               {this.state.rows.map((row, i) => (

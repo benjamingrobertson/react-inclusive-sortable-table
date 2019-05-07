@@ -40,11 +40,12 @@ export default class App extends Component {
     return (
       <div>
         <Table
-          rows={rows}
+          caption="Front end websites"
+          className="exampleClass"
           headers={headers}
           rowHeaders
-          caption="Front end websites"
-          sortable
+          rows={rows}
+          sortable={[1, 3]}
         />
       </div>
     );
