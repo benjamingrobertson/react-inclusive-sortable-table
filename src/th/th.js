@@ -29,6 +29,7 @@ const th = ({
             sortDir={sortDir}
             isCurrent={sortedBy === i}
             customArrow={customArrow}
+            className={styles.defaultArrow}
           />
           <span className={styles.visuallyHidden}>
             sort by {header} in

@@ -40,27 +40,3 @@ caption {
   margin-bottom: 0.5rem;
   text-align: left;
 }
-
-th button {
-  background: #fff;
-  color: #000;
-  border: 0;
-  padding: 0.125rem 0.5rem;
-  border-radius: 0.25rem;
-  font-weight: bold;
-  vertical-align: middle;
-  margin-left: 0.333rem;
-}
-
-
-th svg {
-  stroke: currentColor;
-  stroke-width: 20;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
-  width: 0.5rem;
-  height: 1.5em;
-}
-
-

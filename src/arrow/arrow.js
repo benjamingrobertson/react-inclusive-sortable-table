@@ -11,7 +11,12 @@ export default class Arrow extends Component {
     }
 
     return (
-      <svg viewBox='0 0 100 200' width='100' height='200'>
+      <svg
+        className={this.props.className}
+        viewBox='0 0 100 200'
+        width='100'
+        height='200'
+      >
         {!(!ascending && isCurrent) && (
           <polyline points='20 50, 50 20, 80 50' />
         )}
@@ -27,5 +32,6 @@ export default class Arrow extends Component {
 Arrow.propTypes = {
   sortDir: PropTypes.string,
   isCurrent: PropTypes.bool,
-  customArrow: PropTypes.func
+  customArrow: PropTypes.func,
+  className: PropTypes.string
 }
