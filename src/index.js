@@ -58,13 +58,15 @@ export default class Table extends Component {
       rows: prevState.rows.slice(0).sort((a, b) => {
         return (
           // If a custom sort method is provided for this column, use it.
-          (customSort[i] && customSort[i](a, b, sortDirection, i)) ||
+          (customSort &&
+            customSort[i] &&
+            customSort[i](a, b, sortDirection, i)) ||
           // Otherwise use the default sort.
           this.sort(a, b, sortDirection, i)
         )
       }),
       sortedBy: i,
-      sortDir: sortDir
+      sortDir: sortDirection
     }))
   }
 
