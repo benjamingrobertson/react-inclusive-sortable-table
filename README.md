@@ -8,6 +8,8 @@ Read the artice! [Data Tables](https://inclusive-components.design/data-tables/)
 
 This component displays a `<table>` on large viewports and a definition list `<dl>` on small viewports.
 
+Demo: https://benjamingrobertson.github.io/react-inclusive-sortable-table/
+
 ## Install
 
 ```bash
