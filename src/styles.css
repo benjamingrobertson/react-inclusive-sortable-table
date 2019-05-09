@@ -12,12 +12,28 @@ body {
   overflow-x: hidden;
 }
 
-.tableContainer {
+.tableScroll {
   overflow-x: auto;
 }
 
-@media (max-width: 400px) {
+/**
+ * Hide the table display on viewports less than 400px wide.
+ */
+@media (max-width: 399px) {
   .tableContainer {
+    display: none;
+  }
+}
+
+/**
+ * Display the definition list on viewports less than 400px wide.
+ */
+.listsContainer {
+  display: block;
+}
+
+@media (min-width: 400px) {
+  .listsContainer {
     display: none;
   }
 }

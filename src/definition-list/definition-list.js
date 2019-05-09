@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import styles from './styles.css'
+import './styles.css'
 
-const DefinitionList = ({ caption, rows, headers }) => (
-  <div className={styles.listsContainer}>
+const DefinitionList = ({ caption, className, rows, headers }) => (
+  <div className={className}>
     <h2>{caption}</h2>
     {rows.map((row, i) => (
       <div key={i}>
@@ -27,6 +27,7 @@ const DefinitionList = ({ caption, rows, headers }) => (
 
 DefinitionList.propTypes = {
   caption: PropTypes.string.isRequired,
+  className: PropTypes.string,
   rows: PropTypes.array.isRequired,
   headers: PropTypes.array.isRequired
 }

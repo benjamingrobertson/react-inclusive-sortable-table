@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import debounce from 'debounce'
 
 import styles from './styles.css'
 import DefinitionList from './definition-list/definition-list'
-import Th from './th/th'
+import Table from './table/table'
 
-export default class Table extends Component {
+export default class InclusiveTable extends Component {
   constructor(props) {
     super(props)
     this.state = {
       tabindex: null,
       rows: props.rows,
       sortedBy: null,
-      sortDir: 'none'
+      sortDir: 'none',
+      windowWidth: 0
     }
     this.container = React.createRef()
     this.sortBy = this.sortBy.bind(this)
     this.sort = this.sort.bind(this)
+    this.handleResize = debounce(this.handleResize.bind(this), 50, false)
     this.captionID =
       'caption-' +
       Math.random()
@@ -25,6 +29,8 @@ export default class Table extends Component {
   }
 
   static propTypes = {
+    /** An optional breakpoint, determines when the `<dl>` switches to a `<table>` */
+    breakpoint: PropTypes.number,
     caption: PropTypes.string,
     className: PropTypes.string,
     customArrow: PropTypes.func,
@@ -78,9 +84,26 @@ export default class Table extends Component {
     this.setState({
       tabindex: scrollable ? '0' : null
     })
+
+    if (this.props.breakpoint) {
+      window.addEventListener('resize', this.handleResize)
+      this.setState({ windowWidth: window.innerWidth })
+    }
   }
+
+  componentWillUnmount() {
+    if (this.props.breakpoint) {
+      window.removeEventListener('resize', this.handleResize)
+    }
+  }
+
+  handleResize() {
+    this.setState({ windowWidth: window.innerWidth })
+  }
+
   render() {
     const {
+      breakpoint,
       caption,
       className,
       customArrow,
@@ -89,57 +112,65 @@ export default class Table extends Component {
       rows,
       sortable
     } = this.props
+    const { tabindex, sortedBy, sortDir, windowWidth } = this.state
 
     return (
       <div className={className}>
-        <div
-          className={styles.tableContainer}
-          ref={this.container}
-          tabIndex={this.state.tabindex}
-          aria-labelledby={this.captionID}
-          role='group'
-        >
-          <table>
-            <caption id={this.captionID}>
-              {caption}
-              {this.state.tabindex === '0' && (
-                <div>
-                  <small>(scroll to see more)</small>
-                </div>
-              )}
-            </caption>
-            <tbody>
-              <tr>
-                {headers.map((header, i) => (
-                  <Th
-                    header={header}
-                    i={i}
-                    key={i}
-                    sortable={sortable}
-                    sortBy={this.sortBy}
-                    sortDir={this.state.sortDir}
-                    sortedBy={this.state.sortedBy}
-                    customArrow={customArrow}
-                  />
-                ))}
-              </tr>
-              {this.state.rows.map((row, i) => (
-                <tr key={i}>
-                  {row.map((cell, i) =>
-                    rowHeaders && i < 1 ? (
-                      <th scope='row' key={i}>
-                        {cell}
-                      </th>
-                    ) : (
-                      <td key={i}>{cell}</td>
-                    )
-                  )}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <DefinitionList caption={caption} rows={rows} headers={headers} />
+        {breakpoint && (
+          <div ref={this.container}>
+            {windowWidth >= breakpoint ? (
+              <Table
+                caption={caption}
+                captionID={this.captionID}
+                className={classnames(styles.tableScroll, {
+                  [styles.tableContainer]: !breakpoint
+                })}
+                customArrow={customArrow}
+                headers={headers}
+                rowHeaders={rowHeaders}
+                rows={this.state.rows}
+                sortable={sortable}
+                sortBy={this.sortBy}
+                sortDir={sortDir}
+                sortedBy={sortedBy}
+                tabindex={tabindex}
+              />
+            ) : (
+              <DefinitionList
+                className={classnames({ [styles.listsContainer]: !breakpoint })}
+                caption={caption}
+                rows={rows}
+                headers={headers}
+              />
+            )}
+          </div>
+        )}
+        {!breakpoint && (
+          <div ref={this.container}>
+            <Table
+              caption={caption}
+              captionID={this.captionID}
+              className={classnames(styles.tableScroll, {
+                [styles.tableContainer]: !breakpoint
+              })}
+              customArrow={customArrow}
+              headers={headers}
+              rowHeaders={rowHeaders}
+              rows={this.state.rows}
+              sortable={sortable}
+              sortBy={this.sortBy}
+              sortDir={sortDir}
+              sortedBy={sortedBy}
+              tabindex={tabindex}
+            />
+            <DefinitionList
+              className={classnames({ [styles.listsContainer]: !breakpoint })}
+              caption={caption}
+              rows={rows}
+              headers={headers}
+            />
+          </div>
+        )}
       </div>
     )
   }

@@ -73,6 +73,23 @@ class Example extends Component {
 
 ## Props
 
+### breakpoint
+
+An optional value, in pixels, of where you want the definition list to change to a table. The default is 400px. If you use the default setting, the breakpoints are managed in CSS.
+
+If you pass in a value, the component will add a debounced window resize listener for triggering the render.
+
+```jsx
+<Table
+  breakpoint={500}
+  rows={rows}
+  headers={headers}
+  rowHeaders
+  caption="Front end websites"
+  sortable
+  />
+```
+
 ### caption
 
 The title of your table. Will be wrapped in a `<caption>` for the table display and an `<h2>` for the definition list display.
